@@ -186,7 +186,7 @@ export default function LandingPage() {
               <div className="hero-badge">AUDITORÍA Y CONSULTORÍA PARA RESTAURANTES</div>
 
               <h1>
-                Usted conoce su restaurante. Nosotros podemos ayudarle a verlo desde otra perspectiva.
+                Vos conoces tu restaurante. Nosotros te ayudamos a verlo <span className="gradient-text">desde otra perspectiva</span>.
               </h1>
 
               <p>
