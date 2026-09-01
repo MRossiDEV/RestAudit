@@ -183,7 +183,7 @@ export default function LandingPage() {
         <div className="container">
           <div className="hero-grid">
             <div>
-              <div className="hero-badge">AUDITORÍA Y CONSULTORÍA PARA RESTAURANTES</div>
+              <div className="hero-badge">AUDITORÍA Y CONSULTORÍA</div>
 
               <h1>
                 Vos conoces tu restaurante. Nosotros te ayudamos a verlo <span className="gradient-text">desde otra perspectiva</span>.
