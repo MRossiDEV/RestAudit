@@ -4,6 +4,9 @@ import LoginForm from "./login-form";
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-6">
+      <Link href="/" className="brand-mark mb-8 text-2xl">
+        VOR<span>A</span>
+      </Link>
       <LoginForm />
       <p className="mt-6 text-sm text-muted">
         New here?{" "}

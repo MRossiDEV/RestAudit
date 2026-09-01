@@ -29,7 +29,7 @@ export default function LoginForm() {
             className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
           />
           {state?.errors?.email && (
-            <p className="mt-1 text-xs text-red-600">{state.errors.email[0]}</p>
+            <p className="mt-1 text-xs text-negative">{state.errors.email[0]}</p>
           )}
         </div>
 
@@ -46,12 +46,12 @@ export default function LoginForm() {
             className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
           />
           {state?.errors?.password && (
-            <p className="mt-1 text-xs text-red-600">{state.errors.password[0]}</p>
+            <p className="mt-1 text-xs text-negative">{state.errors.password[0]}</p>
           )}
         </div>
 
         {state?.message && (
-          <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+          <p className="rounded-lg border border-negative/30 bg-negative/10 px-3 py-2 text-sm text-negative">
             {state.message}
           </p>
         )}

@@ -24,8 +24,8 @@ export default async function PortalLayout({
       <header className="border-b border-border bg-surface">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-3">
           <div className="flex items-center gap-8">
-            <Link href="/portal" className="text-base font-semibold tracking-tight">
-              RestAudit
+            <Link href="/portal" className="brand-mark text-base">
+              VOR<span>A</span>
             </Link>
             <nav className="hidden items-center gap-5 md:flex">
               {nav.map((item) => (
