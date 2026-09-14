@@ -39,6 +39,7 @@ const ROLE_HIERARCHY: Record<string, number> = {
   senior_auditor: 3,
   auditor: 2,
   owner: 1,
+  candidate: 0,
 };
 
 export function roleLevel(role: string): number {

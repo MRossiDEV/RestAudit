@@ -10,7 +10,7 @@ function TemplateRow({ template }: { template: ReturnType<typeof listTemplates>[
           <h3 className="font-medium text-foreground">{template.name}</h3>
           {!template.active && (
             <span className="rounded-full bg-surface px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-2">
-              inactive
+              inactiva
             </span>
           )}
         </div>
@@ -37,7 +37,7 @@ function TemplateRow({ template }: { template: ReturnType<typeof listTemplates>[
             type="submit"
             className="text-xs text-muted hover:text-foreground"
           >
-            {template.active ? "Deactivate" : "Activate"}
+            {template.active ? "Desactivar" : "Activar"}
           </button>
         </form>
       </div>
@@ -52,28 +52,28 @@ export default async function AdminAuditTemplates() {
     <div className="mx-auto max-w-5xl space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold tracking-tight">
-          Audit Templates
+          Plantillas de auditoría
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Methodology is DB-configured — never hardcoded. Templates own
-          sections, questions, scoring model, and report template.
+          La metodología está configurada en la base de datos y nunca se codifica de forma fija.
+          Las plantillas definen secciones, preguntas, modelo de puntuación y plantilla del informe.
         </p>
       </div>
 
       <section>
-        <h2 className="mb-3 font-display text-base font-semibold">Methodology</h2>
+        <h2 className="mb-3 font-display text-base font-semibold">Metodología</h2>
         <div className="overflow-hidden rounded-xl border border-border bg-surface">
           {templates.map((t) => (
             <TemplateRow key={t.id} template={t} />
           ))}
           {templates.length === 0 && (
-            <p className="p-6 text-sm text-muted">No templates yet.</p>
+            <p className="p-6 text-sm text-muted">Todavía no hay plantillas.</p>
           )}
         </div>
       </section>
 
       <section>
-        <h2 className="mb-3 font-display text-base font-semibold">New Template</h2>
+        <h2 className="mb-3 font-display text-base font-semibold">Nueva plantilla</h2>
         <div className="rounded-xl border border-border bg-surface p-5">
           <CreateTemplateForm />
         </div>

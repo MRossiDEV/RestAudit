@@ -4,11 +4,11 @@ import { getRestaurant } from "@/db/queries/admin";
 import { ActivityFeed } from "../../activity-feed";
 
 const STATUS_LABEL: Record<string, string> = {
-  new: "New",
-  data_collection: "Data Collected",
-  ai_analysis: "AI Analysis",
-  auditor_review: "Review & Quality",
-  delivered: "Delivered",
+  new: "Nuevo",
+  data_collection: "Datos recopilados",
+  ai_analysis: "Análisis de IA",
+  auditor_review: "Revisión y calidad",
+  delivered: "Entregado",
 };
 
 function Field({ label, value }: { label: string; value?: string | number }) {
@@ -38,7 +38,7 @@ export default async function RestaurantDetail({
           href="/admin/restaurants"
           className="text-xs text-muted hover:text-foreground"
         >
-          ← Restaurants
+          ← Restaurantes
         </Link>
         <div className="mt-2 flex items-center gap-3">
           <h1 className="font-display text-2xl font-semibold tracking-tight">
@@ -58,23 +58,23 @@ export default async function RestaurantDetail({
         <div className="lg:col-span-2 space-y-6">
           <div className="rounded-xl border border-border bg-surface p-5">
             <h2 className="mb-4 font-display text-base font-semibold">
-              Business Profile
+              Perfil del negocio
             </h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <Field label="Cuisine" value={String(p.cuisine ?? "")} />
-              <Field label="Location" value={String(p.location ?? "")} />
-              <Field label="Service model" value={String(p.service_model ?? "")} />
-              <Field label="Seats" value={Number(p.number_of_seats) || undefined} />
+              <Field label="Cocina" value={String(p.cuisine ?? "")} />
+              <Field label="Ubicación" value={String(p.location ?? "")} />
+              <Field label="Modelo de servicio" value={String(p.service_model ?? "")} />
+              <Field label="Mesas" value={Number(p.number_of_seats) || undefined} />
               <Field
-                label="Locations"
+                label="Sucursales"
                 value={Number(p.number_of_locations) || undefined}
               />
               <Field
-                label="Avg. check"
+                label="Ticket medio"
                 value={Number(p.average_check) ? `$${p.average_check}` : undefined}
               />
               <Field
-                label="Opened"
+                label="Apertura"
                 value={String(p.opening_date ?? "")}
               />
             </div>
@@ -83,7 +83,7 @@ export default async function RestaurantDetail({
           <div className="rounded-xl border border-border bg-surface">
             <div className="border-b border-border px-5 py-4">
               <h2 className="font-display text-base font-semibold">
-                Intelligence Timeline
+                Cronología de inteligencia
               </h2>
             </div>
             <div className="p-3">
@@ -94,9 +94,9 @@ export default async function RestaurantDetail({
 
         <div className="space-y-4">
           <div className="rounded-xl border border-border bg-surface p-5">
-            <h2 className="mb-3 font-display text-base font-semibold">Audits</h2>
+            <h2 className="mb-3 font-display text-base font-semibold">Auditorías</h2>
             {restaurant.audits.length === 0 ? (
-              <p className="text-sm text-muted">No audits yet.</p>
+              <p className="text-sm text-muted">Todavía no hay auditorías.</p>
             ) : (
               <ul className="space-y-3">
                 {restaurant.audits.map((a) => (

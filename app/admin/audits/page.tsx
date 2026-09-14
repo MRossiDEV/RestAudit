@@ -12,11 +12,11 @@ import type { Audit } from "@/types/domain";
 import CreateAuditForm from "./create-audit";
 
 const COLUMN_TITLES: Record<string, string> = {
-  new: "New",
-  data_collection: "Data Collected",
-  ai_analysis: "AI Analysis",
-  auditor_review: "Review & Quality",
-  delivered: "Delivered",
+  new: "Nuevo",
+  data_collection: "Datos recopilados",
+  ai_analysis: "Análisis de IA",
+  auditor_review: "Revisión y calidad",
+  delivered: "Entregado",
 };
 
 const PRIORITY_STYLE: Record<string, string> = {
@@ -39,7 +39,7 @@ function AuditCard({ audit }: { audit: Audit }) {
           href="/admin/audits"
           className="text-sm font-medium leading-snug hover:text-primary"
         >
-          {audit.restaurant_name ?? "Restaurant"}
+          {audit.restaurant_name ?? "Restaurante"}
         </Link>
         <span
           className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase ${PRIORITY_STYLE[audit.priority] ?? "bg-surface text-muted"}`}
@@ -47,7 +47,7 @@ function AuditCard({ audit }: { audit: Audit }) {
           {audit.priority}
         </span>
       </div>
-      <p className="mt-1 text-xs text-muted">{audit.template_name ?? "Audit"}</p>
+      <p className="mt-1 text-xs text-muted">{audit.template_name ?? "Auditoría"}</p>
 
       {audit.vora_score != null && (
         <p className="mt-2 text-lg font-semibold text-accent-cyan">
@@ -67,8 +67,8 @@ function AuditCard({ audit }: { audit: Audit }) {
       </div>
 
       <p className="mt-2 text-[11px] text-muted-2">
-        {audit.assigned_consultant_name ?? "Unassigned"}
-        {audit.deadline ? ` · due ${audit.deadline}` : ""}
+        {audit.assigned_consultant_name ?? "Sin asignar"}
+        {audit.deadline ? ` · vence ${audit.deadline}` : ""}
       </p>
 
       <div className="mt-3 flex justify-end gap-2">
@@ -111,10 +111,10 @@ export default async function AdminAudits() {
     <div className="mx-auto max-w-7xl">
       <div className="mb-6">
         <h1 className="font-display text-2xl font-semibold tracking-tight">
-          Audits
+          Auditorías
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Audit Operations Center — pipeline across all restaurants.
+          Centro de operaciones de auditoría — pipeline en todos los restaurantes.
         </p>
       </div>
 
@@ -122,7 +122,7 @@ export default async function AdminAudits() {
         {/* Left sidebar: create audit + templates */}
         <aside className="hidden w-80 shrink-0 flex-col gap-4 lg:flex">
           <div className="rounded-xl border border-border bg-surface p-5">
-            <h2 className="mb-3 font-display text-base font-semibold">New Audit</h2>
+            <h2 className="mb-3 font-display text-base font-semibold">Nueva auditoría</h2>
             <CreateAuditForm
               restaurants={restaurants}
               templates={templates}
@@ -132,12 +132,12 @@ export default async function AdminAudits() {
 
           <div className="rounded-xl border border-border bg-surface p-5">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="font-display text-base font-semibold">Templates</h2>
+              <h2 className="font-display text-base font-semibold">Plantillas</h2>
               <Link
                 href="/admin/audit-templates"
                 className="text-xs text-muted hover:text-primary"
               >
-                Manage
+                Gestionar
               </Link>
             </div>
             <ul className="space-y-2">
@@ -173,7 +173,7 @@ export default async function AdminAudits() {
                   ))}
                   {audits.length === 0 && (
                     <p className="px-1 py-3 text-center text-xs text-muted-2">
-                      Empty
+                      Vacío
                     </p>
                   )}
                 </div>

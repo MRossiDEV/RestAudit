@@ -41,48 +41,48 @@ export default async function AdminDashboard() {
     <div className="mx-auto max-w-6xl space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold tracking-tight">
-          Command Center
+          Centro de Comando
         </h1>
         <p className="mt-1 text-sm text-muted">
-          What is happening across the VORA operation right now.
+          Qué está ocurriendo en la operación de VORA en este momento.
         </p>
       </div>
 
       <section>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
           <KpiCard
-            label="Restaurants"
+            label="Restaurantes"
             value={kpi.totalRestaurants}
-            sub="active clients"
+            sub="clientes activos"
             href="/admin/restaurants"
           />
           <KpiCard
-            label="Under Analysis"
+            label="En análisis"
             value={kpi.inAnalysis}
-            sub="in pipeline"
+            sub="en proceso"
             accent
             href="/admin/audits"
           />
           <KpiCard
-            label="Active Audits"
+            label="Auditorías activas"
             value={kpi.activeAudits}
-            sub="not delivered"
+            sub="sin entregar"
             href="/admin/audits"
           />
           <KpiCard
-            label="Pending Review"
+            label="Pendientes de revisión"
             value={kpi.pendingReview}
-            sub="quality gate"
+            sub="control de calidad"
             accent
             href="/admin/audits"
           />
           <KpiCard
-            label="Reports Delivered"
+            label="Informes entregados"
             value={kpi.delivered}
             href="/admin/audits"
           />
           <KpiCard
-            label="New Leads"
+            label="Nuevos leads"
             value={kpi.newLeads}
             sub={`${kpi.totalLeads} total`}
             href="/admin/leads"
@@ -95,7 +95,7 @@ export default async function AdminDashboard() {
           <div className="rounded-xl border border-border bg-surface">
             <div className="border-b border-border px-5 py-4">
               <h2 className="font-display text-base font-semibold">
-                Operational Activity
+                Actividad operativa
               </h2>
             </div>
             <div className="p-3">
@@ -107,21 +107,21 @@ export default async function AdminDashboard() {
         <div className="space-y-4">
           <div className="rounded-xl border border-border bg-surface p-5">
             <h2 className="font-display text-base font-semibold">
-              Average VORA Score
+              Promedio de score VORA
             </h2>
             <p className="mt-2 text-3xl font-semibold tracking-tight text-accent-cyan">
               {kpi.avgScore}
             </p>
-            <p className="mt-1 text-xs text-muted">across scored audits</p>
+            <p className="mt-1 text-xs text-muted">en auditorías calificadas</p>
           </div>
           <div className="rounded-xl border border-border bg-surface p-5">
             <h2 className="font-display text-base font-semibold">
-              Active Consultants
+              Consultores activos
             </h2>
             <p className="mt-2 text-3xl font-semibold tracking-tight text-primary">
               {kpi.consultants}
             </p>
-            <p className="mt-1 text-xs text-muted">on the team</p>
+            <p className="mt-1 text-xs text-muted">en el equipo</p>
           </div>
         </div>
       </section>

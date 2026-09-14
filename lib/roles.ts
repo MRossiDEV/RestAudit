@@ -1,9 +1,10 @@
 const LABELS: Record<string, string> = {
-  super_admin: "Super Admin",
-  org_admin: "Organization Admin",
-  senior_auditor: "Senior Auditor",
+  super_admin: "Super administrador",
+  org_admin: "Administrador de la organización",
+  senior_auditor: "Auditor senior",
   auditor: "Auditor",
-  owner: "Owner",
+  owner: "Propietario",
+  candidate: "Candidato",
 };
 
 export function roleLabel(role: string): string {

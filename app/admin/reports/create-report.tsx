@@ -40,14 +40,14 @@ export default function CreateReportForm({
     <form onSubmit={submit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="text-sm font-medium">Restaurant</label>
+          <label className="text-sm font-medium">Restaurante</label>
           <select
             required
             value={restaurantId}
             onChange={(e) => setRestaurantId(e.target.value)}
             className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
           >
-            <option value="">Select…</option>
+            <option value="">Selecciona…</option>
             {restaurants.map((r) => (
               <option key={r.id} value={r.id}>
                 {r.name}
@@ -56,13 +56,13 @@ export default function CreateReportForm({
           </select>
         </div>
         <div>
-          <label className="text-sm font-medium">Template</label>
+          <label className="text-sm font-medium">Plantilla</label>
           <select
             value={templateId}
             onChange={(e) => setTemplateId(e.target.value)}
             className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
           >
-            <option value="">None</option>
+            <option value="">Ninguna</option>
             {templates.map((t) => (
               <option key={t.id} value={t.id}>
                 {t.name}
@@ -72,12 +72,12 @@ export default function CreateReportForm({
         </div>
       </div>
       <div>
-        <label className="text-sm font-medium">Title</label>
+        <label className="text-sm font-medium">Título</label>
         <input
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g. La Cabrera — Financial Report"
+          placeholder="Ej. La Cabrera — Informe financiero"
           className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
         />
       </div>
@@ -106,7 +106,7 @@ export default function CreateReportForm({
         disabled={pending || !restaurantId}
         className="glow-primary w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
       >
-        {pending ? "Creating..." : "Create report"}
+        {pending ? "Creando..." : "Crear informe"}
       </button>
     </form>
   );

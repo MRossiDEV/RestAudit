@@ -18,14 +18,14 @@ export default async function SectorPlaceholder({
         {title}
       </h1>
       <p className="mt-2 max-w-md text-sm text-muted">
-        This sector of the Command Center is scheduled for an upcoming build
-        phase. The navigation, guards, and shell are already in place.
+        Este sector del Centro de Comando está programado para la próxima fase de desarrollo.
+        La navegación, las protecciones y la estructura ya están en su lugar.
       </p>
       <Link
         href="/admin"
         className="glow-primary mt-6 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
       >
-        Back to Command Center
+        Volver al Centro de Comando
       </Link>
     </div>
   );

@@ -11,37 +11,37 @@ export default async function AdminAI() {
     <div className="mx-auto max-w-6xl">
       <div className="mb-6">
         <h1 className="font-display text-2xl font-semibold tracking-tight">
-          VORA Intelligence
+          VORA Inteligencia
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Configure the AI providers that power analysis and report generation.
-          Keys and models are stored per provider and applied at runtime.
+          Configura los proveedores de IA que impulsan el análisis y la generación de informes.
+          Las claves y los modelos se almacenan por proveedor y se aplican en tiempo de ejecución.
         </p>
       </div>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">Providers</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Proveedores</p>
           <p className="mt-1 font-display text-2xl font-semibold">
             {activeProviders.length}
             <span className="text-sm font-normal text-muted-2">
-              {" "}/ {providers.length} active
+              {" "}/ {providers.length} activos
             </span>
           </p>
         </div>
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">API keys set</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Claves API configuradas</p>
           <p className="mt-1 font-display text-2xl font-semibold text-accent-green">
             {configured.length}
-            <span className="text-sm font-normal text-muted-2"> configured</span>
+            <span className="text-sm font-normal text-muted-2"> configuradas</span>
           </p>
         </div>
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">Model</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Modelo</p>
           <p className="mt-1 flex items-center gap-1.5 text-sm font-medium text-foreground">
             <Sparkles className="h-4 w-4 text-accent-violet" />
             {activeProviders.map((p) => p.default_model).filter(Boolean).join(" · ") ||
-              "None selected"}
+              "Ninguno seleccionado"}
           </p>
         </div>
       </div>

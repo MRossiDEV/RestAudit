@@ -45,14 +45,14 @@ export default function CreateAuditForm({
   return (
     <form onSubmit={submit} className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-muted-2">Restaurant</label>
+        <label className="text-xs font-medium text-muted-2">Restaurante</label>
         <select
           required
           value={restaurantId}
           onChange={(e) => setRestaurantId(e.target.value)}
           className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
         >
-          <option value="">Select…</option>
+          <option value="">Selecciona…</option>
           {restaurants.map((r) => (
             <option key={r.id} value={r.id}>
               {r.name}
@@ -62,13 +62,13 @@ export default function CreateAuditForm({
       </div>
 
       <div>
-        <label className="text-xs font-medium text-muted-2">Template</label>
+        <label className="text-xs font-medium text-muted-2">Plantilla</label>
         <select
           value={templateId}
           onChange={(e) => setTemplateId(e.target.value)}
           className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
         >
-          <option value="">None</option>
+          <option value="">Ninguna</option>
           {templates.map((t) => (
             <option key={t.id} value={t.id}>
               {t.name}
@@ -79,20 +79,20 @@ export default function CreateAuditForm({
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs font-medium text-muted-2">Priority</label>
+          <label className="text-xs font-medium text-muted-2">Prioridad</label>
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
             className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
           >
-            <option value="low">Low</option>
+            <option value="low">Baja</option>
             <option value="normal">Normal</option>
-            <option value="high">High</option>
-            <option value="urgent">Urgent</option>
+            <option value="high">Alta</option>
+            <option value="urgent">Urgente</option>
           </select>
         </div>
         <div>
-          <label className="text-xs font-medium text-muted-2">Deadline</label>
+          <label className="text-xs font-medium text-muted-2">Fecha límite</label>
           <input
             type="date"
             value={deadline}
@@ -103,13 +103,13 @@ export default function CreateAuditForm({
       </div>
 
       <div>
-        <label className="text-xs font-medium text-muted-2">Consultant</label>
+        <label className="text-xs font-medium text-muted-2">Consultor</label>
         <select
           value={consultantId}
           onChange={(e) => setConsultantId(e.target.value)}
           className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
         >
-          <option value="">Unassigned</option>
+          <option value="">Sin asignar</option>
           {consultants.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
@@ -129,7 +129,7 @@ export default function CreateAuditForm({
         disabled={pending || !restaurantId}
         className="glow-primary w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
       >
-        {pending ? "Creating..." : "Create audit"}
+        {pending ? "Creando..." : "Crear auditoría"}
       </button>
     </form>
   );

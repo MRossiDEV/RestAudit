@@ -8,6 +8,7 @@ const envSchema = z.object({
   SECONDARY_AI_PROVIDER: z.enum(["openai", "anthropic", "local"]).default("anthropic"),
   OPENAI_API_KEY: z.string().optional(),
   ANTHROPIC_API_KEY: z.string().optional(),
+  APP_URL: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse({
@@ -17,6 +18,7 @@ const parsed = envSchema.safeParse({
   SECONDARY_AI_PROVIDER: process.env.SECONDARY_AI_PROVIDER,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+  APP_URL: process.env.APP_URL,
 });
 
 if (!parsed.success) {

@@ -9,9 +9,9 @@ import type { Report } from "@/types/domain";
 import CreateReportForm from "./create-report";
 
 const COLUMN_TITLES: Record<string, string> = {
-  draft: "Draft",
-  reviewed: "Reviewed",
-  delivered: "Delivered",
+  draft: "Borrador",
+  reviewed: "Revisado",
+  delivered: "Entregado",
 };
 
 const STATUS_DOT: Record<string, string> = {
@@ -40,7 +40,7 @@ function ReportCard({ report }: { report: Report }) {
         </p>
       )}
       <p className="mt-1 text-[11px] text-muted-2">
-        {report.template_name ?? "Custom"}
+        {report.template_name ?? "Personalizado"}
       </p>
     </Link>
   );
@@ -55,11 +55,11 @@ export default async function AdminReports() {
     <div className="mx-auto max-w-7xl">
       <div className="mb-6">
         <h1 className="font-display text-2xl font-semibold tracking-tight">
-          Reports
+          Informes
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Central report lifecycle — Draft → Reviewed → Delivered. AI
-          generation and review happen in one sitting, then deliver.
+          Ciclo central de informes — Borrador → Revisado → Entregado. La generación y revisión con IA
+          se realizan en una sola sesión y luego se entregan.
         </p>
       </div>
 
@@ -67,12 +67,12 @@ export default async function AdminReports() {
         {/* Left sidebar: new report + templates */}
         <aside className="hidden w-80 shrink-0 flex-col gap-4 lg:flex">
           <div className="rounded-xl border border-border bg-surface p-5">
-            <h2 className="mb-3 font-display text-base font-semibold">New Report</h2>
+            <h2 className="mb-3 font-display text-base font-semibold">Nuevo informe</h2>
             <CreateReportForm restaurants={restaurants} templates={templates} />
           </div>
 
           <div className="rounded-xl border border-border bg-surface p-5">
-            <h2 className="mb-3 font-display text-base font-semibold">Report Templates</h2>
+            <h2 className="mb-3 font-display text-base font-semibold">Plantillas de informe</h2>
             <div className="space-y-4">
               {templates.map((t) => (
                 <div key={t.id} className="rounded-lg border border-border/60 p-4">
@@ -124,7 +124,7 @@ export default async function AdminReports() {
                   ))}
                   {reports.length === 0 && (
                     <p className="px-1 py-3 text-center text-xs text-muted-2">
-                      Empty
+                      Vacío
                     </p>
                   )}
                 </div>

@@ -27,7 +27,7 @@ export default function CreateTemplateForm() {
   return (
     <form action={action} className="space-y-4">
       <div>
-        <label className="text-sm font-medium">Name</label>
+        <label className="text-sm font-medium">Nombre</label>
         <input
           name="name"
           required
@@ -35,22 +35,22 @@ export default function CreateTemplateForm() {
         />
       </div>
       <div>
-        <label className="text-sm font-medium">Type</label>
+        <label className="text-sm font-medium">Tipo</label>
         <select
           name="type"
           className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
         >
-          <option value="custom">Custom</option>
-          <option value="quick_review">Quick Review</option>
-          <option value="financial">Financial</option>
-          <option value="operational">Operational</option>
-          <option value="menu_engineering">Menu Engineering</option>
-          <option value="full">Full Restaurant Audit</option>
-          <option value="turnaround">Turnaround</option>
+          <option value="custom">Personalizado</option>
+          <option value="quick_review">Revisión rápida</option>
+          <option value="financial">Financiero</option>
+          <option value="operational">Operacional</option>
+          <option value="menu_engineering">Ingeniería del menú</option>
+          <option value="full">Auditoría completa del restaurante</option>
+          <option value="turnaround">Recuperación / turnaround</option>
         </select>
       </div>
       <div>
-        <label className="text-sm font-medium">Description</label>
+        <label className="text-sm font-medium">Descripción</label>
         <textarea
           name="description"
           rows={2}
@@ -58,7 +58,7 @@ export default function CreateTemplateForm() {
         />
       </div>
       <div>
-        <label className="text-sm font-medium">Sections</label>
+        <label className="text-sm font-medium">Secciones</label>
         <div className="mt-1 flex gap-2">
           <input
             value={sectionInput}
@@ -69,7 +69,7 @@ export default function CreateTemplateForm() {
                 addSection();
               }
             }}
-            placeholder="Add section, press Enter"
+            placeholder="Añade una sección y pulsa Enter"
             className="flex-1 rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
           />
           <button
@@ -77,7 +77,7 @@ export default function CreateTemplateForm() {
             onClick={addSection}
             className="rounded-lg border border-border px-3 text-sm text-muted hover:text-foreground"
           >
-            Add
+            Añadir
           </button>
         </div>
         {sections.length > 0 && (
@@ -109,7 +109,7 @@ export default function CreateTemplateForm() {
         disabled={pending}
         className="glow-primary w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
       >
-        {pending ? "Creating..." : "Create template"}
+        {pending ? "Creando..." : "Crear plantilla"}
       </button>
     </form>
   );

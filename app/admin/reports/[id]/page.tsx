@@ -5,9 +5,9 @@ import { getReport, REPORT_COLUMNS } from "@/db/queries/reports";
 import { setReportStatusAction } from "@/server/actions/admin";
 
 const STATUS_LABEL: Record<string, string> = {
-  draft: "Draft",
-  reviewed: "Reviewed",
-  delivered: "Delivered",
+  draft: "Borrador",
+  reviewed: "Revisado",
+  delivered: "Entregado",
 };
 
 const STATUS_CHIP: Record<string, string> = {
@@ -17,11 +17,11 @@ const STATUS_CHIP: Record<string, string> = {
 };
 
 const NEXT_ACTION: Partial<Record<string, string>> = {
-  reviewed: "Mark as reviewed",
-  delivered: "Deliver to client",
+  reviewed: "Marcar como revisado",
+  delivered: "Entregar al cliente",
 };
 
-const SOURCE_LABEL: Record<string, string> = { ai: "AI", human: "Human" };
+const SOURCE_LABEL: Record<string, string> = { ai: "IA", human: "Humano" };
 
 export default async function ReportDetail({
   params,
@@ -46,7 +46,7 @@ export default async function ReportDetail({
           href="/admin/reports"
           className="text-xs text-muted hover:text-foreground"
         >
-          ← Reports
+          ← Informes
         </Link>
         <div className="mt-2 flex flex-wrap items-center gap-3">
           <h1 className="font-display text-2xl font-semibold tracking-tight">
@@ -69,11 +69,11 @@ export default async function ReportDetail({
         <p className="text-sm text-muted">
           {next
             ? next === "delivered"
-              ? "Send the final report to the client."
-              : "Confirm the human review is complete."
+              ? "Envía el informe final al cliente."
+              : "Confirma que la revisión humana está completa."
             : report.status === "delivered"
-              ? "Delivered to the client"
-              : "Draft"}
+              ? "Entregado al cliente"
+              : "Borrador"}
         </p>
         <div className="flex items-center gap-2">
           {prev && (
@@ -104,9 +104,9 @@ export default async function ReportDetail({
       </div>
 
       <section className="space-y-3">
-        <h2 className="font-display text-base font-semibold">Report Builder</h2>
+        <h2 className="font-display text-base font-semibold">Generador del informe</h2>
         {report.sections.length === 0 ? (
-          <p className="text-sm text-muted">No sections yet.</p>
+          <p className="text-sm text-muted">Todavía no hay secciones.</p>
         ) : (
           report.sections.map((s) => (
             <article
@@ -127,7 +127,7 @@ export default async function ReportDetail({
                   </span>
                   {s.status === "reviewed" && (
                     <span className="rounded bg-accent-cyan/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-accent-cyan">
-                      Reviewed
+                      Revisado
                     </span>
                   )}
                 </div>

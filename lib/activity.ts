@@ -4,68 +4,95 @@ import type { AuditLog } from "@/types/domain";
 // Command Center feed and restaurant intelligence timelines.
 const LABELS: Record<string, { text: (e: AuditLog) => string }> = {
   "restaurant.vora_check_completed": {
-    text: () => "completed the VORA Check",
+    text: () => "completó la comprobación VORA",
   },
   "restaurant.report_opened": {
-    text: () => "opened their report",
+    text: () => "abrió su informe",
   },
   "audit.analysis_submitted": {
     text: (e) => {
       const name = str(e.metadata?.audit);
-      return name ? `submitted ${name} analysis` : "submitted an analysis";
+      return name ? `envió el análisis de ${name}` : "envió un análisis";
     },
   },
   "audit.assigned": {
-    text: (e) => `assigned to ${str(e.metadata?.consultant) ?? "a consultant"}`,
+    text: (e) => `asignado a ${str(e.metadata?.consultant) ?? "un consultor"}`,
   },
   "audit.created": {
-    text: () => "created a new audit",
+    text: () => "creó una auditoría nueva",
   },
   "audit.status_changed": {
-    text: (e) => `moved to ${str(e.metadata?.status) ?? "next stage"}`,
+    text: (e) => `cambió al estado ${str(e.metadata?.status) ?? "siguiente etapa"}`,
   },
   "audit.delivered": {
-    text: () => "delivered the audit report",
+    text: () => "entregó el informe de auditoría",
   },
   "ai.findings_generated": {
     text: (e) =>
-      `VORA Intelligence generated ${str(e.metadata?.count) ?? ""} findings`,
+      `VORA Intelligence generó ${str(e.metadata?.count) ?? ""} hallazgos`,
   },
   "report.approved": {
-    text: () => "approved a report",
+    text: () => "aprobó un informe",
   },
   "lead.qualified": {
-    text: () => "qualified a new lead",
+    text: () => "calificó un nuevo lead",
   },
   "report.created": {
-    text: (e) => `created report "${str(e.metadata?.title)}"`,
+    text: (e) => `creó el informe "${str(e.metadata?.title)}"`,
   },
   "report.status_changed": {
     text: (e) => {
       const status = str(e.metadata?.status);
-      if (status === "delivered") return "delivered a report to the client";
-      if (status === "reviewed") return "marked a report as reviewed";
-      return `moved report to ${status || "next stage"}`;
+      if (status === "delivered") return "entregó un informe al cliente";
+      if (status === "reviewed") return "marcó un informe como revisado";
+      return `movió el informe a ${status || "la siguiente etapa"}`;
     },
   },
   "template.created": {
-    text: (e) => `created template ${str(e.metadata?.name)}`,
+    text: (e) => `creó la plantilla ${str(e.metadata?.name)}`,
   },
   "provider.updated": {
     text: (e) =>
-      `configured ${str(e.metadata?.name)} (${str(e.metadata?.model) || "default model"})`,
+      `configuró ${str(e.metadata?.name)} (${str(e.metadata?.model) || "modelo predeterminado"})`,
   },
   "provider.activated": {
-    text: (e) => `enabled ${str(e.metadata?.name)} as an AI provider`,
+    text: (e) => `habilitó ${str(e.metadata?.name)} como proveedor de IA`,
   },
   "provider.deactivated": {
-    text: (e) => `disabled ${str(e.metadata?.name)}`,
+    text: (e) => `deshabilitó ${str(e.metadata?.name)}`,
   },
   "template.activated": {
-    text: () => "activated a template",
+    text: () => "activó una plantilla",
   },
   "template.deactivated": {
-    text: () => "deactivated a template",
+    text: () => "desactivó una plantilla",
+  },
+  "talent.profile_created": {
+    text: (e) => `creó el perfil de talento ${str(e.metadata?.name) ?? ""}`,
+  },
+  "talent.profile_updated": {
+    text: (e) => `actualizó el perfil de talento ${str(e.metadata?.name) ?? ""}`,
+  },
+  "talent.profile_deleted": {
+    text: (e) => `eliminó el perfil de talento ${str(e.metadata?.name) ?? ""}`,
+  },
+  "talent.job_created": {
+    text: (e) => `publicó el empleo "${str(e.metadata?.title)}"`,
+  },
+  "talent.job_updated": {
+    text: (e) => `actualizó el empleo "${str(e.metadata?.title)}"`,
+  },
+  "talent.job_status_changed": {
+    text: (e) => `cambió el estado del empleo a ${str(e.metadata?.status) ?? "siguiente etapa"}`,
+  },
+  "talent.candidate_unlocked": {
+    text: (e) => `desbloqueó el candidato ${str(e.metadata?.alias) ?? ""}`,
+  },
+  "talent.application_status_changed": {
+    text: (e) => `movió una candidatura a ${str(e.metadata?.status) ?? "siguiente etapa"}`,
+  },
+  "talent.verification_updated": {
+    text: () => "actualizó una verificación de talento",
   },
 };
 
@@ -107,13 +134,13 @@ export function describeActivity(entry: AuditLog): ActivityItem {
 export function timeAgo(iso: string): string {
   const then = new Date(iso.replace(" ", "T") + "Z");
   const seconds = Math.max(0, Math.floor((Date.now() - then.getTime()) / 1000));
-  if (seconds < 60) return "just now";
+  if (seconds < 60) return "ahora mismo";
   const mins = Math.floor(seconds / 60);
-  if (mins < 60) return `${mins}m ago`;
+  if (mins < 60) return `${mins} min`;
   const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return `${hours} h`;
   const days = Math.floor(hours / 24);
-  if (days < 7) return `${days}d ago`;
+  if (days < 7) return `${days} d`;
   return then.toLocaleDateString();
 }
 

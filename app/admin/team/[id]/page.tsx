@@ -4,11 +4,11 @@ import { getConsultant, listAuditsForConsultant } from "@/db/queries/admin";
 import { roleLabel } from "@/lib/roles";
 
 const STATUS_LABEL: Record<string, string> = {
-  new: "New",
-  data_collection: "Data Collected",
-  ai_analysis: "AI Analysis",
-  auditor_review: "Review & Quality",
-  delivered: "Delivered",
+  new: "Nuevo",
+  data_collection: "Datos recopilados",
+  ai_analysis: "Análisis de IA",
+  auditor_review: "Revisión y calidad",
+  delivered: "Entregado",
 };
 
 export default async function ConsultantDetail({
@@ -27,7 +27,7 @@ export default async function ConsultantDetail({
     <div className="mx-auto max-w-5xl space-y-8">
       <div>
         <Link href="/admin/team" className="text-xs text-muted hover:text-foreground">
-          ← Consultants & Team
+          ← Consultores y equipo
         </Link>
         <div className="mt-2 flex items-center gap-3">
           <h1 className="font-display text-2xl font-semibold tracking-tight">
@@ -42,25 +42,25 @@ export default async function ConsultantDetail({
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">Specialization</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Especialización</p>
           <p className="mt-1 text-sm text-foreground">
             {consultant.specialization || "—"}
           </p>
         </div>
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">Experience</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Experiencia</p>
           <p className="mt-1 text-sm text-foreground">
-            {consultant.experience_years} years
+            {consultant.experience_years} años
           </p>
         </div>
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">Performance</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Rendimiento</p>
           <p className="mt-1 text-sm font-semibold text-accent-cyan">
             {consultant.rating} / 100
           </p>
         </div>
         <div className="rounded-xl border border-border bg-surface p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-2">Workload</p>
+          <p className="text-xs uppercase tracking-wide text-muted-2">Carga de trabajo</p>
           <p className="mt-1 text-sm text-foreground">
             {workloadPct}% · {consultant.active_audits}/{consultant.max_parallel_audits}
           </p>
@@ -68,19 +68,19 @@ export default async function ConsultantDetail({
       </section>
 
       <section>
-        <h2 className="mb-3 font-display text-base font-semibold">Assigned Audits</h2>
+        <h2 className="mb-3 font-display text-base font-semibold">Auditorías asignadas</h2>
         <div className="overflow-hidden rounded-xl border border-border bg-surface">
           {audits.length === 0 ? (
-            <p className="p-6 text-sm text-muted">No audits assigned.</p>
+            <p className="p-6 text-sm text-muted">No hay auditorías asignadas.</p>
           ) : (
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-2">
-                  <th className="px-4 py-3 font-medium">Restaurant</th>
-                  <th className="px-4 py-3 font-medium">Template</th>
-                  <th className="px-4 py-3 font-medium">Status</th>
-                  <th className="px-4 py-3 font-medium">Score</th>
-                  <th className="px-4 py-3 font-medium">Progress</th>
+                  <th className="px-4 py-3 font-medium">Restaurante</th>
+                  <th className="px-4 py-3 font-medium">Plantilla</th>
+                  <th className="px-4 py-3 font-medium">Estado</th>
+                  <th className="px-4 py-3 font-medium">Puntuación</th>
+                  <th className="px-4 py-3 font-medium">Progreso</th>
                 </tr>
               </thead>
               <tbody>

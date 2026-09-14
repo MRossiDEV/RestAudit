@@ -15,15 +15,15 @@ export default async function AdminTeam() {
     <div className="mx-auto max-w-5xl space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold tracking-tight">
-          Consultants & Team
+          Consultores y equipo
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Internal team, specialization, and live workload across active audits.
+          Equipo interno, especialización y carga de trabajo en tiempo real para auditorías activas.
         </p>
       </div>
 
       <section>
-        <h2 className="mb-3 font-display text-base font-semibold">Team</h2>
+        <h2 className="mb-3 font-display text-base font-semibold">Equipo</h2>
         <div className="overflow-hidden rounded-xl border border-border bg-surface">
           {consultants.map((c) => (
             <div
@@ -52,14 +52,14 @@ export default async function AdminTeam() {
                 <div className="mt-1 flex flex-wrap gap-4 text-xs text-muted-2">
                   <span>
                     <span className="font-medium text-foreground">{c.active_audits}</span>{" "}
-                    active
+                    activas
                   </span>
                   <span>
                     <span className="font-medium text-foreground">{c.completed_audits}</span>{" "}
-                    completed
+                    completadas
                   </span>
                   <span>
-                    Rating{" "}
+                    Valoración{" "}
                     <span className="font-medium text-accent-cyan">{c.rating}</span>
                   </span>
                 </div>
@@ -67,7 +67,7 @@ export default async function AdminTeam() {
 
               <div className="w-full sm:w-48">
                 <div className="mb-1 flex items-center justify-between text-[11px] text-muted-2">
-                  <span>Workload</span>
+                  <span>Carga de trabajo</span>
                   <span>
                     {Math.round(c.workload * 100)}% · {c.active_audits}/
                     {c.max_parallel_audits}
@@ -83,7 +83,7 @@ export default async function AdminTeam() {
             </div>
           ))}
           {consultants.length === 0 && (
-            <p className="p-6 text-sm text-muted">No consultants yet.</p>
+            <p className="p-6 text-sm text-muted">Todavía no hay consultores.</p>
           )}
         </div>
       </section>

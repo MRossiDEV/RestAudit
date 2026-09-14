@@ -36,45 +36,46 @@ interface NavGroup {
 
 const GROUPS: NavGroup[] = [
   {
-    label: "Overview",
-    items: [{ href: "/admin", label: "Command Center", Icon: LayoutDashboard }],
+    label: "Resumen",
+    items: [{ href: "/admin", label: "Centro de Comando", Icon: LayoutDashboard }],
   },
   {
-    label: "Business",
+    label: "Negocio",
     items: [
-      { href: "/admin/restaurants", label: "Restaurants", Icon: UtensilsCrossed },
-      { href: "/admin/audits", label: "Audits", Icon: ClipboardCheck },
-      { href: "/admin/reports", label: "Reports", Icon: FileText },
+      { href: "/admin/restaurants", label: "Restaurantes", Icon: UtensilsCrossed },
+      { href: "/admin/audits", label: "Auditorías", Icon: ClipboardCheck },
+      { href: "/admin/reports", label: "Informes", Icon: FileText },
     ],
   },
   {
-    label: "People",
+    label: "Personas",
     items: [
-      { href: "/admin/team", label: "Consultants & Team", Icon: Users },
-      { href: "/admin/leads", label: "Leads & CRM", Icon: Target },
+      { href: "/admin/team", label: "Consultores y Equipo", Icon: Users },
+      { href: "/admin/leads", label: "Prospectos y CRM", Icon: Target },
+      { href: "/admin/talent", label: "Talento", Icon: Users },
     ],
   },
   {
-    label: "Intelligence",
+    label: "Inteligencia",
     items: [
-      { href: "/admin/ai", label: "VORA Intelligence", Icon: Sparkles },
-      { href: "/admin/knowledge", label: "Knowledge Base", Icon: BookOpen },
-      { href: "/admin/training", label: "Training Dataset", Icon: GraduationCap },
-      { href: "/admin/benchmarks", label: "Benchmarks", Icon: BarChart3 },
+      { href: "/admin/ai", label: "VORA Inteligencia", Icon: Sparkles },
+      { href: "/admin/knowledge", label: "Base de Conocimiento", Icon: BookOpen },
+      { href: "/admin/training", label: "Conjunto de Entrenamiento", Icon: GraduationCap },
+      { href: "/admin/benchmarks", label: "Comparativas", Icon: BarChart3 },
     ],
   },
   {
-    label: "Analytics",
+    label: "Analítica",
     items: [
-      { href: "/admin/analytics", label: "Platform Analytics", Icon: LineChart },
-      { href: "/admin/activity", label: "Activity Logs", Icon: ScrollText },
+      { href: "/admin/analytics", label: "Analítica de la Plataforma", Icon: LineChart },
+      { href: "/admin/activity", label: "Registros de Actividad", Icon: ScrollText },
     ],
   },
   {
-    label: "Administration",
+    label: "Administración",
     items: [
-      { href: "/admin/billing", label: "Billing", Icon: CreditCard },
-      { href: "/admin/system", label: "Settings", Icon: Settings },
+      { href: "/admin/billing", label: "Facturación", Icon: CreditCard },
+      { href: "/admin/system", label: "Configuración", Icon: Settings },
     ],
   },
 ];
@@ -136,7 +137,7 @@ export function AdminShell({
           )}
           <button
             onClick={toggleCollapsed}
-            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            title={collapsed ? "Expandir barra lateral" : "Contraer barra lateral"}
             className="rounded-lg p-1.5 text-muted transition-colors hover:bg-surface hover:text-foreground"
           >
             {collapsed ? (
@@ -209,7 +210,7 @@ export function AdminShell({
                   type="submit"
                   className="text-xs text-muted hover:text-foreground"
                 >
-                  Sign out
+                  Cerrar sesión
                 </button>
               </form>
             </>

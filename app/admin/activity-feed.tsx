@@ -14,7 +14,7 @@ export function ActivityFeed({
 }) {
   const shown = limit ? entries.slice(0, limit) : entries;
   if (shown.length === 0) {
-    return <p className="text-sm text-muted">No activity yet.</p>;
+    return <p className="text-sm text-muted">Todavía no hay actividad.</p>;
   }
   return (
     <ul className="space-y-1">

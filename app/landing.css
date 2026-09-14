@@ -1117,6 +1117,79 @@
   letter-spacing: -0.05em;
 }
 
+/* -------------------------------- TALENT CTA -------------------------------- */
+
+.landing .talent-cta {
+  border-top: 1px solid var(--border);
+}
+
+.landing .talent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.landing .talent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(9, 17, 28, 0.9);
+}
+
+.landing .talent-card-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+.landing .talent-card-label-cyan {
+  color: var(--cyan);
+}
+
+.landing .talent-card h3 {
+  margin-bottom: 4px;
+}
+
+.landing .talent-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.landing .talent-card ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.landing .talent-card li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.landing .talent-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.landing .talent-card .btn {
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
 /* -------------------------------- FINAL CTA -------------------------------- */
 
 .landing .final-cta {
@@ -1237,6 +1310,10 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .landing .talent-grid {
+    grid-template-columns: 1fr;
+  }
+
   .landing .steps {
     grid-template-columns: 1fr 1fr;
   }
@@ -1270,6 +1347,7 @@
   .landing .feature-grid,
   .landing .steps,
   .landing .comparison,
+  .landing .talent-grid,
   .landing .footer-grid {
     grid-template-columns: 1fr;
   }

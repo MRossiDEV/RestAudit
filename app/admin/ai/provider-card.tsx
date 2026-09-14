@@ -81,12 +81,12 @@ export default function ProviderCard({ provider }: { provider: AIProvider }) {
 
       <div className="space-y-3">
         <div>
-          <label className="text-xs font-medium text-muted-2">Display name</label>
+          <label className="text-xs font-medium text-muted-2">Nombre visible</label>
           <input value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
         </div>
 
         <div>
-          <label className="text-xs font-medium text-muted-2">API key</label>
+          <label className="text-xs font-medium text-muted-2">Clave API</label>
           <div className="relative mt-1">
             <input
               type={showKey ? "text" : "password"}
@@ -98,7 +98,7 @@ export default function ProviderCard({ provider }: { provider: AIProvider }) {
             <button
               type="button"
               onClick={() => setShowKey((s) => !s)}
-              aria-label={showKey ? "Hide key" : "Show key"}
+              aria-label={showKey ? "Ocultar clave" : "Mostrar clave"}
               className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-2 hover:text-foreground"
             >
               {showKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -107,7 +107,7 @@ export default function ProviderCard({ provider }: { provider: AIProvider }) {
         </div>
 
         <div>
-          <label className="text-xs font-medium text-muted-2">Base URL (optional)</label>
+          <label className="text-xs font-medium text-muted-2">URL base (opcional)</label>
           <input
             value={baseUrl}
             onChange={(e) => setBaseUrl(e.target.value)}
@@ -115,17 +115,17 @@ export default function ProviderCard({ provider }: { provider: AIProvider }) {
             className={inputCls}
           />
           <p className="mt-1 text-[11px] text-muted-2">
-            Custom endpoint for NVIDIA NIM or self-hosted gateways.
+            Endpoint personalizado para NVIDIA NIM o gateways autohospedados.
           </p>
         </div>
 
         <div>
-          <label className="text-xs font-medium text-muted-2">Model</label>
+          <label className="text-xs font-medium text-muted-2">Modelo</label>
           <input
             list={`models-${provider.id}`}
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            placeholder="Select or type a model"
+            placeholder="Selecciona o escribe un modelo"
             className={inputCls}
           />
           <datalist id={`models-${provider.id}`}>
@@ -177,7 +177,7 @@ export default function ProviderCard({ provider }: { provider: AIProvider }) {
           className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-medium text-muted transition-colors hover:border-primary/40 hover:text-foreground disabled:opacity-60"
         >
           <Plug className="h-4 w-4" />
-          {test.state === "running" ? "Testing…" : "Test connection"}
+          {test.state === "running" ? "Probando…" : "Probar conexión"}
         </button>
         <button
           type="submit"
@@ -186,13 +186,13 @@ export default function ProviderCard({ provider }: { provider: AIProvider }) {
         >
           {saved ? (
             <>
-              <Check className="h-4 w-4" /> Saved
+              <Check className="h-4 w-4" /> Guardado
             </>
           ) : pending ? (
-            "Saving…"
+            "Guardando…"
           ) : (
             <>
-              <Save className="h-4 w-4" /> Save
+              <Save className="h-4 w-4" /> Guardar
             </>
           )}
         </button>

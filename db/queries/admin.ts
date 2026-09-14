@@ -159,6 +159,20 @@ export function listRestaurants() {
   }));
 }
 
+export function createRestaurant(input: {
+  organizationId: string;
+  name: string;
+  slug: string;
+}) {
+  const db = getDb();
+  const id = newId();
+  db.prepare(
+    `INSERT INTO restaurants (id, organization_id, name, slug, profile, status)
+     VALUES (?, ?, ?, ?, '{}', 'active')`,
+  ).run(id, input.organizationId, input.name, input.slug);
+  return getRestaurant(id)!;
+}
+
 export function getRestaurant(id: string) {
   const db = getDb();
   const row = db
