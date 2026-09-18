@@ -9,7 +9,6 @@ import {
   addTalentExperience,
   addTalentLanguage,
   addTalentSkill,
-  createCandidateProfile,
   deleteTalentEducation,
   deleteTalentExperience,
   deleteTalentLanguage,
@@ -42,46 +41,12 @@ function revalidateOwn(userId: string): void {
   const profile = ownProfile(userId);
   if (profile?.slug) {
     revalidatePath(`/talent/${profile.slug}`);
+    revalidatePath(`/talent/${profile.slug}/dashboard`);
   }
-  revalidatePath("/talent/profile");
   revalidatePath("/talent");
 }
 
-/* ── Profile create / update ──────────────────────────────── */
-
-export async function createProfileAction(input: {
-  firstName: string;
-  lastName: string;
-  professionalTitle?: string;
-  city?: string;
-  country?: string;
-  summary?: string;
-}): Promise<{ ok?: boolean; error?: string }> {
-  const user = await requireUser();
-  const firstName = input.firstName.trim();
-  const lastName = input.lastName.trim();
-  if (!firstName || !lastName) return { error: "Nombre y apellido son obligatorios" };
-  if (ownProfile(user.id)) return { error: "Ya tienes un perfil" };
-
-  const profile = createCandidateProfile({
-    userId: user.id,
-    firstName,
-    lastName,
-    professionalTitle: input.professionalTitle,
-    city: input.city,
-    country: input.country,
-    summary: input.summary,
-  });
-
-  writeAuditLog({
-    actorId: user.id,
-    action: "talent.public_profile_created",
-    entityType: "talent_profiles",
-    entityId: profile.id,
-  });
-  revalidateOwn(user.id);
-  return { ok: true };
-}
+/* ── Profile update ───────────────────────────────────────── */
 
 export async function updateProfileAction(input: {
   professionalTitle?: string;
@@ -404,5 +369,5 @@ export async function deleteLanguageAction(
 }
 
 export async function goToProfile(): Promise<void> {
-  redirect("/talent/profile");
+  redirect("/talent/dashboard");
 }

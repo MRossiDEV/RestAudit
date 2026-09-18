@@ -4,7 +4,9 @@ export type UserRole =
   | "senior_auditor"
   | "auditor"
   | "owner"
-  | "candidate";
+  | "business"
+  | "candidate"
+  | "agent";
 
 export type MemberRole =
   | "org_admin"
@@ -274,7 +276,18 @@ export interface TalentProfile {
   relocation_available: boolean;
   employment_types: string[];
   salary_expectation: number | null;
+  /* ── International-ready (0018) ── */
+  region: string;
+  relocation_scope: RelocationScope;
+  international_available: boolean;
+  visa_sponsorship_required: boolean;
+  preferred_countries: string[];
+  work_authorization_countries: string[];
+  available_from: string;
+  profile_strength: number;
 }
+
+export type RelocationScope = "local" | "regional" | "national" | "international";
 
 export interface TalentSkill {
   id: string;
@@ -346,8 +359,9 @@ export interface TalentLanguage {
 
 export interface Job {
   id: string;
-  restaurant_id: string;
+  restaurant_id: string | null;
   restaurant_name?: string;
+  business_id: string | null;
   title: string;
   description: string;
   location: string;
@@ -491,4 +505,367 @@ export interface PublicTalentProfile {
     description: string;
   }[];
   languages: { language: string; proficiency: Proficiency }[];
+}
+
+/* ── VORA Talent v3.0 — Business accounts & discovery ─────── */
+
+export type BusinessVerificationStatus = "unverified" | "pending" | "verified";
+
+export type BusinessRole = "owner" | "admin" | "member";
+
+export interface BusinessProfile {
+  id: string;
+  user_id: string;
+  slug: string | null;
+  business_name: string;
+  business_type: string;
+  country: string;
+  region: string;
+  city: string;
+  website: string;
+  description: string;
+  logo_url: string;
+  contact_name: string;
+  contact_phone: string;
+  hiring_interests: string[];
+  verification_status: BusinessVerificationStatus;
+  tagline: string;
+  size: string;
+  hiring_international: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface BusinessMember {
+  id: string;
+  business_id: string;
+  user_id: string;
+  role: BusinessRole;
+  created_at: string;
+}
+
+export type SavedTalentStatus =
+  | "saved"
+  | "contacted"
+  | "interviewing"
+  | "future_hire"
+  | "seasonal"
+  | "hired"
+  | "rejected"
+  | "archived";
+
+export interface SavedTalent {
+  id: string;
+  business_id: string;
+  talent_profile_id: string;
+  status: SavedTalentStatus;
+  notes: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/** Structured requirements an employer saves as a talent search. */
+export interface TalentSearchRequirements {
+  position?: string;
+  skills?: string[];
+  cuisine?: string;
+  min_experience?: number;
+  country?: string;
+  city?: string;
+  languages?: string[];
+  availability?: AvailabilityStatus[];
+  employment_types?: string[];
+  relocation?: RelocationScope[];
+  international_only?: boolean;
+  salary_min?: number;
+  salary_max?: number;
+}
+
+export type TalentSearchStatus = "active" | "paused" | "closed";
+
+export interface TalentSearch {
+  id: string;
+  business_id: string;
+  title: string;
+  requirements: TalentSearchRequirements;
+  status: TalentSearchStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MatchFactors {
+  position: number;
+  skills: number;
+  experience: number;
+  location: number;
+  availability: number;
+  employmentType: number;
+  languages: number;
+  salary: number;
+}
+
+export interface TalentMatch {
+  id: string;
+  search_id: string;
+  talent_profile_id: string;
+  score: number;
+  factors: MatchFactors;
+  created_at: string;
+}
+
+/**
+ * Why a profile was viewed. Monetization depends on this attribution:
+ * `candidate_shared` is free (the candidate brought the employer);
+ * `search` / `recommendation` / `recruitment` are VORA-generated discovery.
+ */
+export type ProfileAccessContext =
+  | "candidate_shared"
+  | "public_discovery"
+  | "search"
+  | "recommendation"
+  | "application"
+  | "recruitment";
+
+export interface ProfileAccessEvent {
+  id: string;
+  talent_profile_id: string;
+  viewer_user_id: string | null;
+  business_id: string | null;
+  access_context: ProfileAccessContext;
+  referrer: string;
+  created_at: string;
+}
+
+/* ── VORA Agents Network ───────────────────────────────────── */
+
+export type AgentStatus =
+  | "applicant"
+  | "submitted"
+  | "under_review"
+  | "additional_info"
+  | "interview"
+  | "approved"
+  | "active"
+  | "suspended"
+  | "deactivated"
+  | "rejected";
+
+export type AgentApplicationStatus = AgentStatus;
+
+export type AttributionType =
+  | "direct_introduction"
+  | "assisted_registration"
+  | "local_verification"
+  | "agent_referral";
+
+export type CommissionStatus =
+  | "pending"
+  | "approved"
+  | "paid"
+  | "reversed"
+  | "disputed";
+
+export type CommissionType = "percentage" | "fixed";
+
+export type ApplicationSource =
+  | "organic"
+  | "invited"
+  | "referral"
+  | "linkedin"
+  | "facebook"
+  | "instagram"
+  | "event"
+  | "other";
+
+export interface Agent {
+  id: string;
+  user_id: string;
+  status: AgentStatus;
+  country: string;
+  region: string;
+  city: string;
+  specializations: string[];
+  languages: string[];
+  bio: string;
+  avatar_url: string;
+  slug: string;
+  approved_by: string | null;
+  approved_at: string | null;
+  suspended_at: string | null;
+  deactivated_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentApplication {
+  id: string;
+  user_id: string;
+  status: AgentStatus;
+
+  // Step 1: Personal
+  first_name: string;
+  last_name: string;
+  preferred_name: string;
+  date_of_birth: string;
+  email: string;
+  phone: string;
+  whatsapp: string;
+  avatar_url: string;
+  country: string;
+  timezone: string;
+
+  // Step 2: Location
+  region: string;
+  city: string;
+  neighborhood: string;
+  postal_code: string;
+  languages_spoken: string[];
+  languages_written: string[];
+  secondary_territories: string[];
+  travel_willing: string;
+  availability_type: string;
+
+  // Step 3: Professional
+  current_occupation: string;
+  current_company: string;
+  previous_occupations: string[];
+  years_experience: number;
+  industries: string[];
+  hospitality_experience: number;
+  hr_experience: number;
+  sales_experience: number;
+  networking_experience: number;
+  community_involvement: string;
+  entrepreneurship_experience: number;
+  tech_familiarity: string;
+  education: string;
+  certifications: string[];
+  professional_summary: string;
+
+  // Step 4: Network
+  talent_network_size: string;
+  employer_network_size: string;
+  talent_relationship_strength: string;
+  employer_relationship_strength: string;
+  industry_connections: string[];
+  geographic_reach: string;
+
+  // Step 5: Social
+  linkedin_url: string;
+  facebook_url: string;
+  instagram_url: string;
+  tiktok_url: string;
+  x_url: string;
+  website_url: string;
+  portfolio_url: string;
+  business_profile_url: string;
+  other_urls: string[];
+
+  // Step 6: Verification
+  email_verified: boolean;
+  phone_verified: boolean;
+  verification_provider: string;
+  verification_reference: string;
+  verified_at: string | null;
+
+  // Step 7: Assessment
+  assessment_answers: Record<string, string>;
+
+  // Step 8: Motivation
+  motivation_why: string;
+  motivation_industries: string;
+  motivation_geography: string;
+  motivation_qualified: string;
+  motivation_introduce: string;
+  motivation_find_talent: string;
+  motivation_relationships: string;
+
+  // Step 9: References
+  reference1_name: string;
+  reference1_relationship: string;
+  reference1_company: string;
+  reference1_position: string;
+  reference1_email: string;
+  reference1_phone: string;
+  reference1_permission: boolean;
+  reference2_name: string;
+  reference2_relationship: string;
+  reference2_company: string;
+  reference2_position: string;
+  reference2_email: string;
+  reference2_phone: string;
+  reference2_permission: boolean;
+
+  // Meta
+  application_source: ApplicationSource;
+  submitted_at: string | null;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  review_notes: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentAttribution {
+  id: string;
+  agent_id: string;
+  talent_profile_id: string | null;
+  business_id: string | null;
+  attribution_type: AttributionType;
+  attributed_at: string;
+  attributed_by: string | null;
+  notes: string;
+  created_at: string;
+}
+
+export interface AgentCommissionRule {
+  id: string;
+  name: string;
+  country: string;
+  agent_id: string | null;
+  industry: string;
+  transaction_type: string;
+  commission_type: CommissionType;
+  percentage: number | null;
+  fixed_amount: number | null;
+  currency: string;
+  max_per_transaction: number | null;
+  duration_days: number | null;
+  active: boolean;
+  priority: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentCommissionLedgerEntry {
+  id: string;
+  agent_id: string;
+  talent_profile_id: string | null;
+  business_id: string | null;
+  transaction_type: string;
+  transaction_ref: string;
+  gross_amount: number;
+  commission_amount: number;
+  currency: string;
+  status: CommissionStatus;
+  approved_by: string | null;
+  approved_at: string | null;
+  paid_at: string | null;
+  payment_reference: string;
+  notes: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentAuditLog {
+  id: string;
+  agent_id: string | null;
+  actor_id: string | null;
+  action: string;
+  entity_type: string;
+  entity_id: string;
+  previous_value: string;
+  new_value: string;
+  reason: string;
+  created_at: string;
 }

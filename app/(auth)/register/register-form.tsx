@@ -1,86 +1,74 @@
 "use client";
 
-import { useActionState } from "react";
-import { register } from "@/server/actions/auth";
-import type { AuthFormState } from "@/lib/schemas/auth";
+import { useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Building2, User } from "lucide-react";
+import TalentRegisterForm from "./talent-form";
+import CompanyRegisterForm from "./company-form";
 
-export default function RegisterForm() {
-  const [state, action, pending] = useActionState<AuthFormState, FormData>(
-    register,
-    undefined,
-  );
+type Role = "talent" | "company";
+
+export default function UnifiedRegisterForm() {
+  const searchParams = useSearchParams();
+  const initialRole: Role =
+    searchParams.get("role") === "company" ? "company" : "talent";
+  const [role, setRole] = useState<Role>(initialRole);
 
   return (
-    <div className="mx-auto w-full max-w-sm px-6 py-24">
-      <h1 className="text-2xl font-semibold tracking-tight">Create account</h1>
-      <p className="mt-1 text-sm text-muted">
-        Bootstraps the first administrator account.
+    <div className="w-full max-w-md">
+      <div className="mt-10 grid grid-cols-2 gap-2 rounded-xl border border-border bg-surface p-1">
+        <RoleButton
+          active={role === "talent"}
+          onClick={() => setRole("talent")}
+          icon={<User className="h-4 w-4" />}
+          label="Soy profesional"
+        />
+        <RoleButton
+          active={role === "company"}
+          onClick={() => setRole("company")}
+          icon={<Building2 className="h-4 w-4" />}
+          label="Soy empresa"
+        />
+      </div>
+
+      <div className="mt-8">
+        {role === "talent" ? <TalentRegisterForm /> : <CompanyRegisterForm />}
+      </div>
+
+      <p className="mt-8 text-center text-sm text-muted">
+        ¿Ya tenés cuenta?{" "}
+        <Link href="/login" className="text-primary hover:underline">
+          Iniciar sesión
+        </Link>
       </p>
-
-      <form action={action} className="mt-8 space-y-4">
-        <div>
-          <label htmlFor="name" className="text-sm font-medium">
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            required
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
-          />
-          {state?.errors?.name && (
-            <p className="mt-1 text-xs text-negative">{state.errors.name[0]}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="text-sm font-medium">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
-          />
-          {state?.errors?.email && (
-            <p className="mt-1 text-xs text-negative">{state.errors.email[0]}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="password" className="text-sm font-medium">
-            Password
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            required
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
-          />
-          {state?.errors?.password && (
-            <p className="mt-1 text-xs text-negative">{state.errors.password[0]}</p>
-          )}
-        </div>
-
-        {state?.message && (
-          <p className="rounded-lg border border-negative/30 bg-negative/10 px-3 py-2 text-sm text-negative">
-            {state.message}
-          </p>
-        )}
-
-        <button
-          type="submit"
-          disabled={pending}
-          className="glow-primary w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
-        >
-          {pending ? "Creating..." : "Create account"}
-        </button>
-      </form>
     </div>
+  );
+}
+
+function RoleButton({
+  active,
+  onClick,
+  icon,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+        active
+          ? "bg-primary text-primary-foreground"
+          : "text-muted hover:text-foreground"
+      }`}
+    >
+      {icon}
+      {label}
+    </button>
   );
 }

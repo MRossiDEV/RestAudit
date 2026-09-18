@@ -67,6 +67,40 @@ export function getPublicTalentProfile(slug: string): PublicTalentProfile | null
   return toPublicProfile(profile);
 }
 
+/**
+ * Limited preview shown to unauthenticated visitors behind the registration
+ * gate (PRD §13 step 3). Enough to confirm relevance, not enough to contact.
+ */
+export interface PublicProfilePreview {
+  slug: string;
+  name: string;
+  professional_title: string;
+  city: string;
+  country: string;
+  avatar_url: string;
+  summary: string;
+  availability: AvailabilityStatus;
+  skill_names: string[];
+}
+
+export function getPublicProfilePreview(slug: string): PublicProfilePreview | null {
+  const profile = getTalentProfileBySlug(slug);
+  if (!profile) return null;
+  if (profile.profile_visibility !== "public") return null;
+  const full = getTalentProfile(profile.id);
+  return {
+    slug: profile.slug ?? "",
+    name: `${profile.first_name} ${profile.last_name}`.trim(),
+    professional_title: profile.professional_title,
+    city: profile.location,
+    country: profile.country,
+    avatar_url: profile.avatar_url,
+    summary: profile.bio ? profile.bio.slice(0, 220) : "",
+    availability: profile.availability_status as AvailabilityStatus,
+    skill_names: (full?.skills ?? []).slice(0, 6).map((s) => s.name),
+  };
+}
+
 /** List all public profiles for the landing "Ver perfiles" page. */
 export function listPublicTalentProfiles(): PublicTalentProfile[] {
   const db = getDb();

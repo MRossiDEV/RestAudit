@@ -7,6 +7,7 @@ import { createUser, getUserByEmail, hasAnyUser } from "@/db/queries/users";
 import { createOrganization } from "@/db/queries/users";
 import { addMember } from "@/db/queries/members";
 import { createRestaurant } from "@/db/queries/admin";
+import { createCandidateProfile } from "@/db/queries/talent";
 import { getDb } from "@/db";
 import { createSession, destroySession } from "@/lib/session";
 import { writeAuditLog } from "@/lib/audit-log";
@@ -118,6 +119,15 @@ export async function candidateRegister(
     role: "candidate",
   });
 
+  // Every candidate account gets a talent profile at signup — there's no
+  // separate "create profile" step.
+  const [firstName, ...rest] = name.trim().split(/\s+/);
+  createCandidateProfile({
+    userId: user.id,
+    firstName: firstName || name,
+    lastName: rest.join(" "),
+  });
+
   writeAuditLog({
     actorId: user.id,
     action: "user.registered_candidate",
@@ -126,7 +136,7 @@ export async function candidateRegister(
   });
 
   await createSession({ id: user.id, role: user.role });
-  redirect("/talent/profile");
+  redirect("/onboarding/talent");
 }
 
 /**
@@ -205,7 +215,11 @@ function resolveLanding(role: string): string {
     case "owner":
       return "/portal";
     case "candidate":
-      return "/talent/profile";
+      return "/talent/dashboard";
+    case "business":
+      return "/company/dashboard";
+    case "agent":
+      return "/agent/dashboard";
     default:
       return "/";
   }

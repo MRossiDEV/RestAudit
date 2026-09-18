@@ -40,6 +40,7 @@ const ROLE_HIERARCHY: Record<string, number> = {
   auditor: 2,
   owner: 1,
   candidate: 0,
+  agent: 0,
 };
 
 export function roleLevel(role: string): number {
@@ -62,4 +63,24 @@ export function isAuditor(user: CurrentUser): boolean {
   return ["super_admin", "org_admin", "senior_auditor", "auditor"].includes(
     user.role,
   );
+}
+
+export function isAgent(user: CurrentUser): boolean {
+  return user.role === "agent" || user.role === "super_admin";
+}
+
+export async function requireAgent(): Promise<CurrentUser> {
+  const user = await requireUser();
+  if (!isAgent(user)) redirect("/agents/apply");
+  return user;
+}
+
+export function isAdmin(user: CurrentUser): boolean {
+  return ["super_admin", "org_admin"].includes(user.role);
+}
+
+export async function requireAdmin(): Promise<CurrentUser> {
+  const user = await requireUser();
+  if (!isAdmin(user)) redirect("/");
+  return user;
 }

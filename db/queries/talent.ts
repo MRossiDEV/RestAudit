@@ -73,6 +73,14 @@ function mapProfile(row: Row): TalentProfile {
     relocation_available: Boolean(row.relocation_available),
     employment_types: parseJson<string[]>(row.employment_types as string, []),
     salary_expectation: (row.salary_expectation as number | null) ?? null,
+    region: String(row.region ?? ""),
+    relocation_scope: (row.relocation_scope as TalentProfile["relocation_scope"]) ?? "local",
+    international_available: Boolean(row.international_available),
+    visa_sponsorship_required: Boolean(row.visa_sponsorship_required),
+    preferred_countries: parseJson<string[]>(row.preferred_countries as string, []),
+    work_authorization_countries: parseJson<string[]>(row.work_authorization_countries as string, []),
+    available_from: String(row.available_from ?? ""),
+    profile_strength: Number(row.profile_strength ?? 0),
   };
 }
 
@@ -290,8 +298,9 @@ const JOB_SELECT = `
 function mapJob(row: Row): Job {
   return {
     id: String(row.id),
-    restaurant_id: String(row.restaurant_id),
+    restaurant_id: (row.restaurant_id as string | null) ?? null,
     restaurant_name: (row.restaurant_name as string) ?? undefined,
+    business_id: (row.business_id as string | null) ?? null,
     title: String(row.title),
     description: String(row.description ?? ""),
     location: String(row.location ?? ""),
@@ -329,6 +338,19 @@ export function listJobsForRestaurant(restaurantId: string): Job[] {
   const rows = getDb()
     .prepare(`${JOB_SELECT} WHERE j.restaurant_id = ? ORDER BY datetime(j.updated_at) DESC`)
     .all(restaurantId) as Row[];
+  return rows.map(mapJob);
+}
+
+/** Open positions for a business account (for the public /business/[slug] page). */
+export function listJobsForBusiness(businessId: string, status?: JobStatus): Job[] {
+  let sql = `${JOB_SELECT} WHERE j.business_id = ?`;
+  const params: unknown[] = [businessId];
+  if (status) {
+    sql += " AND j.status = ?";
+    params.push(status);
+  }
+  sql += " ORDER BY datetime(j.updated_at) DESC";
+  const rows = getDb().prepare(sql).all(...params) as Row[];
   return rows.map(mapJob);
 }
 
@@ -844,7 +866,8 @@ export function addTalentPortfolioItem(input: {
 }
 
 export function createJob(input: {
-  restaurantId: string;
+  restaurantId?: string | null;
+  businessId?: string | null;
   title: string;
   description?: string;
   location?: string;
@@ -860,13 +883,14 @@ export function createJob(input: {
   const id = newId();
   db.prepare(
     `INSERT INTO jobs
-       (id, restaurant_id, title, description, location, employment_type, salary_min,
+       (id, restaurant_id, business_id, title, description, location, employment_type, salary_min,
         salary_max, experience_required, skills_required, screening_questions, tier, status)
-     VALUES (@id, @restaurantId, @title, @description, @location, @employmentType, @salaryMin,
+     VALUES (@id, @restaurantId, @businessId, @title, @description, @location, @employmentType, @salaryMin,
         @salaryMax, @experienceRequired, @skillsRequired, @screeningQuestions, @tier, 'draft')`,
   ).run({
     id,
-    restaurantId: input.restaurantId,
+    restaurantId: input.restaurantId ?? null,
+    businessId: input.businessId ?? null,
     title: input.title,
     description: input.description ?? "",
     location: input.location ?? "",

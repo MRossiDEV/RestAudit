@@ -42,7 +42,9 @@ export async function uploadAvatarAction(
   const url = `/uploads/avatars/${filename}`;
   updateTalentProfile(profile.id, { avatarUrl: url });
 
-  revalidatePath("/talent/profile");
-  if (profile.slug) revalidatePath(`/talent/${profile.slug}`);
+  if (profile.slug) {
+    revalidatePath(`/talent/${profile.slug}`);
+    revalidatePath(`/talent/${profile.slug}/dashboard`);
+  }
   return { url };
 }

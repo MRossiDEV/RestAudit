@@ -22,6 +22,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import { logout } from "@/server/actions/auth";
+import { BrandIcon, BrandMark } from "@/components/brand";
 
 interface NavItem {
   href: string;
@@ -129,10 +130,16 @@ export function AdminShell({
             collapsed ? "justify-center px-0 py-4" : "justify-between px-4 py-4"
           }`}
         >
-          {!collapsed && (
-            <Link href="/admin" className="brand-mark text-base">
-              VOR<span>A</span>{" "}
-              <span className="font-semibold tracking-normal">Admin</span>
+          {collapsed ? (
+            <Link href="/admin">
+              <BrandIcon size={28} />
+            </Link>
+          ) : (
+            <Link href="/admin" className="flex items-center gap-2">
+              <BrandMark size="sm" />
+              <span className="text-sm font-semibold tracking-normal">
+                Admin
+              </span>
             </Link>
           )}
           <button
