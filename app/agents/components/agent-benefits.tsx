@@ -28,7 +28,7 @@ const benefits = [
   },
   {
     icon: Wifi,
-    title: "Red profesional",
+    title: "Contactos en la industria",
     text: "Construí relaciones dentro de la industria.",
   },
   {

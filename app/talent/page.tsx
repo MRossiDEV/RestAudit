@@ -1,4 +1,4 @@
-import { TalentHeader } from "./components/talent-header";
+import { LandingHeader } from "@/components/landing-header";
 import { TalentHero } from "./components/talent-hero";
 import { CareerTimeline } from "./components/career-timeline";
 import { BuildFeatures } from "./components/build-features";
@@ -20,7 +20,7 @@ export default function TalentLanding() {
         <div className="absolute bottom-[15%] left-[35%] h-[500px] w-[500px] rounded-full bg-fuchsia-600/[0.05] blur-[160px]" />
       </div>
 
-      <TalentHeader />
+      <LandingHeader active="talent" />
       <TalentHero />
       <CareerTimeline />
       <BuildFeatures />

@@ -1,4 +1,4 @@
-import { CompanyHeader } from "./components/company-header";
+import { LandingHeader } from "@/components/landing-header";
 import { CompanyHero } from "./components/company-hero";
 import { SearchDemo } from "./components/search-demo";
 import { SpecializedSearch } from "./components/specialized-search";
@@ -21,7 +21,7 @@ export default function CompanyLanding() {
         <div className="absolute bottom-[15%] left-[35%] h-[500px] w-[500px] rounded-full bg-violet-600/[0.05] blur-[160px]" />
       </div>
 
-      <CompanyHeader />
+      <LandingHeader active="company" />
       <CompanyHero />
       <SearchDemo />
       <SpecializedSearch />

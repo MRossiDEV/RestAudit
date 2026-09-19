@@ -1,4 +1,4 @@
-import { AgentHeader } from "./components/agent-header";
+import { LandingHeader } from "@/components/landing-header";
 import { AgentHero } from "./components/agent-hero";
 import { WhatAgentDoes } from "./components/what-agent-does";
 import { ProfessionalInterviews } from "./components/professional-interviews";
@@ -22,7 +22,7 @@ export default function AgentLanding() {
         <div className="absolute bottom-[15%] left-[35%] h-[500px] w-[500px] rounded-full bg-yellow-600/[0.05] blur-[160px]" />
       </div>
 
-      <AgentHeader />
+      <LandingHeader active="agents" />
       <AgentHero />
       <WhatAgentDoes />
       <ProfessionalInterviews />
