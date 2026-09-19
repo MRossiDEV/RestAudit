@@ -5,7 +5,7 @@ export function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.06] bg-[#07070a]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
-        <BrandLink href="/talent" size="base" subtitle="Talent" />
+        <BrandLink href="/" size="base" subtitle="Talent" />
 
         <nav className="hidden items-center gap-7 md:flex">
           <Link
@@ -22,19 +22,12 @@ export function Header() {
             Empresas
           </Link>
 
-          <a
-            href="#entrevista"
+          <Link
+            href="/agents"
             className="text-sm text-white/50 transition hover:text-white"
           >
-            VORA Interviewed
-          </a>
-
-          <a
-            href="#como-funciona"
-            className="text-sm text-white/50 transition hover:text-white"
-          >
-            Cómo funciona
-          </a>
+            Agents
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">

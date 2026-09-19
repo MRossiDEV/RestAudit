@@ -89,10 +89,10 @@ export const AgentMotivationSchema = z.object({
 
 /* ── Step 9: Review & Submit ───────────────────────────────── */
 export const AgentReviewSchema = z.object({
-  confirmAccurate: z.literal("on", { errorMap: () => ({ message: "Debés confirmar que la información es correcta." }) }),
-  confirmTerms: z.literal("on", { errorMap: () => ({ message: "Debés aceptar los términos." }) }),
-  confirmPrivacy: z.literal("on", { errorMap: () => ({ message: "Debés aceptar la política de privacidad." }) }),
-  confirmNoGuarantee: z.literal("on", { errorMap: () => ({ message: "Debés entender que la aplicación no garantiza aprobación." }) }),
+  confirmAccurate: z.literal("on", { error: "Debés confirmar que la información es correcta." }),
+  confirmTerms: z.literal("on", { error: "Debés aceptar los términos." }),
+  confirmPrivacy: z.literal("on", { error: "Debés aceptar la política de privacidad." }),
+  confirmNoGuarantee: z.literal("on", { error: "Debés entender que la aplicación no garantiza aprobación." }),
 });
 
 export type AgentFormState = {
