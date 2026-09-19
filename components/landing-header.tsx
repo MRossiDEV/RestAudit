@@ -38,12 +38,11 @@ export function LandingHeader({
 }) {
   const primaryCta = cta ?? (active ? CTA[active] : CTA.talent);
   const subtitle = active ? SUBTITLE[active] : "Talent";
-  const brandHref = active ? `/${active}` : "/";
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.06] bg-[#07070a]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
-        <BrandLink href={brandHref} size="base" subtitle={subtitle} />
+        <BrandLink href="/" size="base" subtitle={subtitle} />
 
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((item) => (
